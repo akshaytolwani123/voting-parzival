@@ -14,7 +14,7 @@ def vice_captain(request):
 def vote(request, id):
     user = User.objects.get(id=request.user.id)
     if User.profile.has_voted_for_vice_captain == True:
-        return redirect('/')
+        return render(request, 'vice_captain/vote.html', {'vice_captains': vice_captains, 'user': user})
     else:
         vice_captain = Vice_Captain.objects.get(id=id)
         vice_captain.votes += 1

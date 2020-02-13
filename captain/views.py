@@ -13,7 +13,8 @@ def captain_view(request):
 def vote(request, id):
     user = User.objects.get(id=request.user.id)
     if User.profile.has_voted_for_captain == True:
-        return redirect('/')
+        return render(request, 'captain/vote.html', {'captains': captain, 'user': user})
+
     else:
         captain = Captain.objects.get(id = id)
         captain.votes += 1
