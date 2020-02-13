@@ -11,12 +11,14 @@ def captain_view(request):
     return render(request, 'captain/vote.html', {'captains': captain, 'user': user})
 
 def vote(request, id):
-    captain = Captain.objects.get(id = id)
-    captain.votes += 1
-    captain.save()
     user = User.objects.get(id=request.user.id)
-    user.profile.has_voted_for_captain = True
-    user.profile.voted_captain = captain.name
-    user.save()
-    del captain, user
-    return redirect('/')
+    if User.profile.has_voted_for_captain == True:
+        return redirect('/')
+    else:
+        captain = Captain.objects.get(id = id)
+        captain.votes += 1
+        user.profile.has_voted_for_captain = True
+        user.profile.voted_captain = captain.name
+        user.save()
+        del captain, user
+        return redirect('/')

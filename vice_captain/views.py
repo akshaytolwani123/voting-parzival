@@ -12,11 +12,14 @@ def vice_captain(request):
     return render(request, 'vice_captain/vote.html', {'vice_captains': vice_captains, 'user': user})
 
 def vote(request, id):
-    vice_captain = Vice_Captain.objects.get(id = id)
-    vice_captain.votes += 1
-    user = User.objects.get(id = request.user.id)
-    user.profile.has_voted = True
-    user.profile.voted_for_vice_captain = vice_captain.name
-    del vice_captain, user
-    return redirect('/')
-
+    user = User.objects.get(id=request.user.id)
+    if User.profile.has_voted_for_vice_captain == True:
+        return redirect('/')
+    else:
+        vice_captain = Vice_Captain.objects.get(id=id)
+        vice_captain.votes += 1
+        user.profile.has_voted_for_vice_captain = True
+        user.profile.voted_captain = captain.name
+        user.save()
+        del captain, user
+        return redirect('/')
