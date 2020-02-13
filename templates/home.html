@@ -1,0 +1,9 @@
+{% extends 'base_layout.html' %}
+{% block title %} Voting Site {% endblock %}
+{% block content %}
+<h1><b> Welcome to the School voting Website</b></h1>
+<h1><a href= {% url 'captain:captains' %}> Vote for School Captain </a></h1>
+<br>
+<h1><a href= {% url 'vice_captain:vice_captain' %}>Vote vor School Vice Captain</h1>
+
+{% endblock %}

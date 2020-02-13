@@ -1,0 +1,14 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Vote for your captain {% endblock %}
+
+{% block content %}
+<form method= "post" action= "/account/">
+{% csrf_token %}
+    {{ form }}
+{% if reuest.GET.next %}
+<input type = "hidden" name = "next" value = "{{ request.GET.next }} ">
+  {% endif %}
+  <button type = "submit">Log in </button>
+  </form>
+{% endblock %}

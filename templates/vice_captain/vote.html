@@ -1,0 +1,19 @@
+{% extends 'base_layout.html' %}
+
+{% block title %} Vote for your School Vice Captain {% endblock %}
+
+{% block content %}
+{% if user.has_voted_for_vice_captain %}
+<h1><B><p>You have already voted for the school Vice captain.Please return to the home page by clicking <a HREF=  '/'>here</a></p></B></h1>
+<h1><B> Vote for your School Vice Captain </B></h1>
+{% else %}
+{% for vice_captain in vice_captains %}
+<h3><b>{{ captain.name }}</b></h3>
+<br>
+<img src= ""{{ vice_captain.image.url }}" align="center">
+<br>
+<button><a href ="/vice_captain/vote{{ vice_captain.id }}">Vote</a></button>
+<br>
+{% endfor %}
+{% endif %}
+{% endblock %}
